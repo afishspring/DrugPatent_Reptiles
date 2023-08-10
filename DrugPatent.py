@@ -95,7 +95,7 @@ class DrugPatent_Cite_Reptiles(Reptiles_DOM):
         self.br.quit()
     def getTuple(self, index):
         data_json = {
-            '药品名称': self.br.find_element(By.XPATH, "//tbody/tr[" + str(index) + "]/td[2]/div[1]").text,
+            '仿制药品名称': self.br.find_element(By.XPATH, "//tbody/tr[" + str(index) + "]/td[2]/div[1]").text,
             '受理号': self.br.find_element(By.XPATH, "//tbody/tr[" + str(index) + "]/td[3]/div[1]").text,
             '药品类型': self.br.find_element(By.XPATH, "//tbody/tr[" + str(index) + "]/td[4]/div[1]").text,
             '注册分类': self.br.find_element(By.XPATH, "//tbody/tr[" + str(index) + "]/td[5]/div[1]").text,
@@ -115,13 +115,11 @@ class DrugPatent_Cite_Reptiles(Reptiles_DOM):
         self.br.execute_script("arguments[0].click()", deep)
 
         table_xpath = "//body/div[@id='app']/div[@id='mainIndex']/section[1]/div[1]/div[5]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/form[1]/div[10]/div[1]/div[1]/div[3]/table[1]"
-        while (True):
-            try:
-                detail_table = self.br.find_element(By.XPATH, table_xpath)
-            except exceptions.NoSuchElementException:
-                continue
-            else:
-                break
+        detail_table = self.br.find_element(By.XPATH, table_xpath)
+
+        data_json['被仿制药品名称'] = self.br.find_element(By.XPATH, "//body/div[@id='app']/div[@id='mainIndex']/section[1]/div[1]/div[5]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/form[1]/div[8]/div[1]/div[1]/div[1]").text
+        data_json['剂型'] = self.br.find_element(By.XPATH, "/html[1]/body[1]/div[1]/div[1]/section[1]/div[1]/div[5]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]").text
+        data_json['规格'] = self.br.find_element(By.XPATH, "/html[1]/body[1]/div[1]/div[1]/section[1]/div[1]/div[5]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/form[1]/div[3]/div[2]/div[1]/div[1]").text
 
         login_patent_id = []
         login_grant_index = []

@@ -138,7 +138,7 @@ class Reptiles_DOM(Reptiles):
         n_page = self.getPageNum()
         print("共", n_page, "页")
         data = []
-        for page_i in range(1, 2):
+        for page_i in range(1, n_page+1):
             rows = self.getRowNum(page_i, n_page)
             print(page_i, "页", rows, "行")
             for index in range(1, rows + 1):
